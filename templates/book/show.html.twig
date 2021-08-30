@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" style="width:75%; background-color: #dddddd;">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <th>Cover</th>
+                <td>{{ book.cover }}</td>
+            </tr>
+            <tr>
+                <th>Pdf</th>
+                <td>{{ book.pdf }}</td>
+            </tr>
+            <tr>
+                <th>ReadDate</th>
+                <td>{{ book.readDate ? book.readDate|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a type="button" class="btn btn-secondary my-3" href="{{ path('exhibit_index') }}">Назад</a>
+    {% if book.owner == app.user %}
+    <a href="{{ path('book_edit', {'id': book.id}) }}">Редактировать</a>
+    {{ include('book/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}
